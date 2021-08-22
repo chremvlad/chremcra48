@@ -23,19 +23,20 @@ const UpcomingDataForm = (props) => {
     return setInputDate(event.target.value);
   };
 
-  //Storing input entered data by create a method for submit_form_listener
+  //Storing input entered_data by create a method for submit_form_listener
   const submitHandler = (event) => {
     event.preventDefault();
-    //storing entered data
+    //storing entered data from users_event
     const expenseLiftData = {
       title: inputTitle,
       amount: inputAmount,
       date: new Date(inputDate),
     };
 
- //Second step call parent props_function to lift data
+    //Second step call parent props_function to forward storing data
     //console.log(expenseLiftData);
-    props.onSaveUpComingData(expenseLiftData)
+    //lifting stored entered_data to parent_UpcomingExpense
+    props.onSaveUpComingData(expenseLiftData);
 
     setInputAmount("");
     setInputDate("");
@@ -47,7 +48,6 @@ const UpcomingDataForm = (props) => {
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label> Title:</label>
-
           <input type="text" onChange={titleChangeHandler} value={inputTitle} />
         </div>
         <div className="new-expense__control">
