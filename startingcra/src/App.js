@@ -1,12 +1,14 @@
 
 import React from 'react'
-//import relatives files_components from the compnent folder...
-import ExpenseItem from "./components/Expenses/ExpenseItem";
+//importing relatives files_components from the compnent folder annd attributive...
+import Expenses from "./components/Expenses/Expenses";
 
-//parent
+import UpComingExpense from './components/UpComingExpense/UpComingExpense';
+
+//parent props source is an array
 const App=()=> {
   //data object - properties
-  const expenses = [
+  const outlays = [
     {
       id: "i0",
       date: new Date(2021, 8, 8),
@@ -34,28 +36,16 @@ const App=()=> {
   ];
 
   return (
+    /*all data properties are called props*/
     <div>
-      {/*all attributes of data properties call props*/}
-      <ExpenseItem
-        dat={expenses[0].date}
-        name={expenses[0].name}
-        amount={expenses[0].amount}
-      ></ExpenseItem>
-      <ExpenseItem
-        dat={expenses[1].date}
-        name={expenses[1].name}
-        amount={expenses[1].amount}
-      ></ExpenseItem>
-      <ExpenseItem
-        dat={expenses[2].date}
-        name={expenses[2].name}
-        amount={expenses[2].amount}
-      ></ExpenseItem>
-      <ExpenseItem
-        dat={expenses[3].date}
-        name={expenses[3].name}
-        amount={expenses[3].amount}
-      ></ExpenseItem>
+
+
+      <UpComingExpense />
+
+
+      {/* props for array-items */}
+      <Expenses items={outlays}/>
+      
     </div>
   );
 }
