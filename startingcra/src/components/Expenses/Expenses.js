@@ -1,36 +1,38 @@
-import React from "react";
-import ExpenseItem from "./ExpenseItem";
-//import Card from "../UI/Card";
+import React, { useState } from "react";
+//import ExpenseItem from "./ExpenseItem";
+import ExpensesFilter from "./ExpensesFilter";
+import Card from "../UI/Card";
 
 import "../styles/Expenses.css";
+import ExpensesList from "./ExpensesList";
 
-//note: props receive from parent as like an array listing
+//map(m=>m*2): transforms each element of the original array using a function parameter.
+//const transArray = originalArray.map(function_parameter)
+
+//note: props received from parent is an array_object
 const Expenses = (props) => {
-    return(
-        <div className='expenses'>
-        <ExpenseItem
-          date={props.items[0].date}
-          name={props.items[0].name}
-          amount={props.items[0].amount}
+  const [filteredYear, setFilteredYear] = useState("2020");
+
+  const FilterYearChangedHandler = (selectedYearOption) => {
+    setFilteredYear(selectedYearOption);
+  };
+  //storing filtered props_items_expenses by year to a constant
+  const filteredExpenses = props.items.filter((outLays) => {
+    return outLays.date.getFullYear().toString() === filteredYear;
+  });
+
+
+  return (
+    <div>
+      <Card className="expenses">
+        <ExpensesFilter
+          selectedYear={filteredYear}
+          onFilterChanged={FilterYearChangedHandler}
         />
-        <ExpenseItem
-          date={props.items[1].date}
-          name={props.items[1].name}
-          amount={props.items[1].amount}
-        />
-        <ExpenseItem
-          date={props.items[2].date}
-          name={props.items[2].name}
-          amount={props.items[2].amount}
-        />
-        <ExpenseItem
-          date={props.items[3].date}
-          name={props.items[3].name}
-          amount={props.items[3].amount}
-       />
-      </div>
-    );
- 
+            <ExpensesList items={filteredExpenses}/>
+      </Card>
+    </div>
+  );
 };
 
 export default Expenses;
